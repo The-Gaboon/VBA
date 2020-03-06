@@ -1,15 +1,14 @@
 Sub SendMail()
 
 
-'Outlook Apps API
+'Outlook Apps pkg
 Dim olApp As Outlook.Application
 Dim olMail As Outlook.MailItem
 
 'Start of the Loop with Dynamic Range
 For i = 2 To Sheet1.Cells(Rows.Count, 1).End(xlUp).Row
 
-'1st communication sending within a 2 month range
-If Len(Trim(Cells(i, 10).Value)) = Blank And Cells(i, 26).Value <= 61 And InStr(1, Cells(i, 1).Value, "30G", vbTextCompare) = 0 Then
+If Len(Trim(Cells(i, 10).Value)) = Blank And Cells(i, 26).Value <= 61 Then
 
 
    Set olApp = New Outlook.Application
