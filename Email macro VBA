@@ -1,0 +1,43 @@
+Sub SendMail()
+
+
+'Outlook Apps API
+Dim olApp As Outlook.Application
+Dim olMail As Outlook.MailItem
+
+'Start of the Loop with Dynamic Range
+For i = 2 To Sheet1.Cells(Rows.Count, 1).End(xlUp).Row
+
+'1st communication sending within a 2 month range
+If Len(Trim(Cells(i, 10).Value)) = Blank And Cells(i, 26).Value <= 61 And InStr(1, Cells(i, 1).Value, "30G", vbTextCompare) = 0 Then
+
+
+   Set olApp = New Outlook.Application
+   Set olMail = olApp.CreateItem(olMailItem)
+
+   'French & English Email Template
+   With olMail
+     .To = Cells(i, 8).Value
+        .CC = ""
+        .Subject = ""
+        .HTMLBody = ""
+        .Display
+        ''.Send
+   'Calling Outlook application
+   End With
+
+    Set olMail = Nothing
+    Set olApp = Nothing
+
+    'Filled out the cells in the worksheet
+    Cells(i, 10).Value = "E-mail has been sent"
+    Cells(i, 9).Value = Format(Now, "yyyy/mm/dd")
+
+    'End of conditions
+    End If
+
+    'End of Loop
+    Next
+
+'End of code
+End Sub
